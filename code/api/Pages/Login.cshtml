@@ -1,0 +1,28 @@
+@page
+@model I2R.Storage.Api.Pages.Login
+@{
+    ViewData["Title"] = "Login";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/styles/page-specific/login.css" asp-append-version="true">
+}
+
+<form id="login-form">
+    <fieldset>
+        <legend>Login</legend>
+        <div class="error">
+            <div class="title"></div>
+            <div class="subtitle"></div>
+        </div>
+        <label for="username">Username</label>
+        <input type="text" required="required" id="username" name="username">
+        <label for="password">Password</label>
+        <input type="password" required="required" id="password" name="password">
+        <input type="submit" value="Login">
+    </fieldset>
+</form>
+
+@section Scripts {
+    <script src="~/scripts/page-specific/login.js" asp-append-version="true"></script>
+}

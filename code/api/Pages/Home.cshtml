@@ -1,0 +1,12 @@
+@page
+@model I2R.Storage.Api.Pages.Home
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome</h1>
+
+<pre>
+Id: @(HttpContext.User.FindFirst("AppClaims.USER_ID").Value)
+</pre>

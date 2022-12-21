@@ -1,0 +1,6 @@
+#login-form fieldset {
+    max-width: 23vw;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

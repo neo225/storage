@@ -1,0 +1,10 @@
+POST http://localhost:5068/account/create
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+"username": "ivar",
+"password": "ivar123",
+"firstName": "Ivar",
+"lastName": "Løvlie"
+}
