@@ -1,5 +1,3 @@
-using System.Security.Claims;
-
 namespace I2R.Storage.Api.Database.Models;
 
 public class User : Base
@@ -13,7 +11,6 @@ public class User : Base
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime? LastLoggedOn { get; set; }
-
 
     public IEnumerable<Claim> DefaultClaims() => new List<Claim>() {
         new(AppClaims.USER_ID, Id.ToString()),
