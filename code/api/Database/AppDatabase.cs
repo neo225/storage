@@ -21,6 +21,7 @@ public class AppDatabase : DbContext
         modelBuilder.Entity<Folder>(e => {
             e.HasMany(c => c.Files);
             e.HasMany(c => c.Permissions);
+            e.HasOne(c => c.Parent);
             e.ToTable("folders");
         });
         modelBuilder.Entity<PermissionGroup>(e => {
