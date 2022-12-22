@@ -350,5 +350,19 @@ template {
 
 /* System Fonts as used by GitHub */
 body {
+    background: white;
+    color: #333;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+form .error.show {
+    display: inline-block;
+}
+
+form .error {
+    display: none;
+    padding: .5em 1em;
+    border: 1px solid red;
+    background: rgba(255, 0, 0, .05);
+    color: red;
 }

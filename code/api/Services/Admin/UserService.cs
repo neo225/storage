@@ -40,7 +40,7 @@ public class UserService
         _logger.LogInformation("Logged out user {userId}", httpContext.User.FindFirstValue(AppClaims.USER_ID));
     }
 
-    public async Task MarkUserAsDeleted(Guid userId, Guid actorId) {
+    public async Task MarkUserAsDeletedAsync(Guid userId, Guid actorId) {
         var user = _database.Users.FirstOrDefault(c => c.Id == userId);
         if (user == default) {
             _logger.LogInformation("Tried to delete unknown user {userId}", userId);

@@ -9,8 +9,26 @@
     <title>@ViewData["Title"] - Storage</title>
 </head>
 <body>
+@if (User.Identity?.IsAuthenticated ?? false) {
+    <header>
+        <nav>
+            <div class="left">
+                <a href="/home">Home</a>
+            </div>
+            <div class="right">
+                <profile-modal/>
+            </div>
+        </nav>
+    </header>
+}
 @RenderBody()
+<script src="~/scripts/module.mjs" asp-append-version="true" type="module"></script>
+<script src="~/scripts/helpers.js" asp-append-version="true"></script>
 <script src="~/scripts/base.js" asp-append-version="true"></script>
+@if (User.Identity?.IsAuthenticated ?? false) {
+    <script src="~/scripts/logged-in-base.js" asp-append-version="true"></script>
+    <script src="~/scripts/components/index.js" asp-append-version="true"></script>
+}
 @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

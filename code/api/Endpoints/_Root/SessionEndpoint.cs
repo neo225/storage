@@ -1,9 +1,9 @@
 namespace I2R.Storage.Api.Endpoints._Root;
 
-public class SessionEndpoint : Base
+public class SessionEndpoint : EndpointBase
 {
     [HttpGet("~/session")]
     public ActionResult<LoggedInUserModel.Public> Handle() {
-        return LoggedInUser.ForThePeople(HttpContext);
+        return LoggedInUserModel.ForThePeople(HttpContext);
     }
 }

@@ -1,44 +1,36 @@
 const form = document.getElementById("login-form");
 
-
-function get_login_payload() {
-    return {
-        username: document.querySelector("input[name=username]").value,
-        password: document.querySelector("input[name=password]").value
-    }
-}
-
 function show_error(title, subtitle) {
-    if (!title || !subtitle) {
-        console.error("parameter title or subtitle is empty");
+    const errorEl = form.querySelector(".error");
+    errorEl.classList.remove("show");
+    if (!title && !subtitle) {
+        console.error("Parameter title and subtitle is empty");
         return;
     }
-    const errorEl = form.querySelector(".error");
     if (!errorEl) {
         console.error("#" + form.id + " does not have an .error element")
         return;
     }
-    errorEl.querySelector(".title").innerText = title;
-    errorEl.querySelector(".subtitle").innerHTML = subtitle;
+    errorEl.classList.add("show");
+    errorEl.querySelector(".title").innerText = title ?? "";
+    errorEl.querySelector(".subtitle").innerHTML = subtitle ?? "";
 }
 
 async function submit_login_form(event) {
+    show_error();
     event.preventDefault();
     event.stopPropagation();
-    const response = await fetch("/account/login", {
-        method: "post",
-        body: JSON.stringify(get_login_payload()),
-        headers: {
-            "Content-Type": "application/json;charset=utf-8"
-        }
-    })
-
-    if (response.ok) {
-        const sessionResponse = await fetch("/session");
-        session.set(await sessionResponse.json());
-        location.href = "/home";
+    const loginResponse = await api.account.login_async({
+        username: document.querySelector("input[name=username]").value,
+        password: document.querySelector("input[name=password]").value
+    });
+    if (!loginResponse.ok) {
+        const errorObj = await json_or_default_async(loginResponse);
+        if (errorObj) show_error(errorObj.title, errorObj.subtitle);
+        else show_error(strings.anErrorOccured.v(), strings.tryAgainSoon.v());
         return;
     }
+    location.href = "/home";
 }
 
 function init() {

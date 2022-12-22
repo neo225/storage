@@ -1,8 +1,6 @@
-using I2R.Storage.Api.Endpoints._Root;
-
 namespace I2R.Storage.Api.Endpoints.Account;
 
-public class LoginEndpoint : Base
+public class LoginEndpoint : EndpointBase
 {
     private readonly AppDatabase _database;
     private readonly UserService _userService;
@@ -25,11 +23,11 @@ public class LoginEndpoint : Base
     public async Task<ActionResult> Handle([FromBody] Request request) {
         var user = _database.Users.FirstOrDefault(c => c.Username == request.Username);
         if (user == default) {
-            return BadRequest(_localizer["Invalid username or password"]);
+            return KnownProblem(_localizer["Invalid username or password"]);
         }
 
         if (!PasswordHelper.Verify(request.Password, user.Password)) {
-            return BadRequest(_localizer["Invalid username or password"]);
+            return KnownProblem(_localizer["Invalid username or password"]);
         }
 
         await _userService.LogInUserAsync(HttpContext, user.DefaultClaims());

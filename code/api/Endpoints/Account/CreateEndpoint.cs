@@ -1,6 +1,6 @@
 namespace I2R.Storage.Api.Endpoints.Account;
 
-public class CreateEndpoint : Base
+public class CreateEndpoint : EndpointBase
 {
     private readonly AppDatabase _database;
     private readonly UserService _userService;

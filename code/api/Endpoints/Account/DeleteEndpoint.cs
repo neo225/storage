@@ -1,15 +1,16 @@
 namespace I2R.Storage.Api.Endpoints.Account;
 
-public class LogoutEndpoint : EndpointBase
+public class DeleteEndpoint : EndpointBase
 {
     private readonly UserService _userService;
 
-    public LogoutEndpoint(UserService userService) {
+    public DeleteEndpoint(UserService userService) {
         _userService = userService;
     }
 
-    [HttpGet("~/account/logout")]
+    [HttpDelete("~/account/delete")]
     public async Task<ActionResult> Handle() {
+        await _userService.MarkUserAsDeletedAsync(LoggedInUser.Id, LoggedInUser.Id);
         await _userService.LogOutUserAsync(HttpContext);
         return Ok();
     }
