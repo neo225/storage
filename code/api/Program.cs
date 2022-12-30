@@ -1,4 +1,5 @@
 global using Microsoft.AspNetCore.Mvc;
+global using I2R.Storage.Api.Services.System;
 global using IOL.Helpers;
 global using I2R.Storage.Api.Services.Admin;
 global using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,6 +14,10 @@ global using I2R.Storage.Api.Statics;
 global using Microsoft.AspNetCore.Authorization;
 global using System.Security.Claims;
 global using I2R.Storage.Api.Models;
+global using MR.AspNetCore.Pagination;
+global using MR.EntityFrameworkCore.KeysetPagination;
+global using System.Text.Json;
+using I2R.Storage.Api.Services.System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
 
@@ -32,6 +37,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddLocalization();
 builder.Services.AddRequestLocalization(o => { o.DefaultRequestCulture = new RequestCulture("en"); });
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<StorageService>();
+builder.Services.AddScoped<ShareService>();
+builder.Services.AddScoped<DefaultResourceService>();
 builder.Services.AddDbContext<AppDatabase>(o => {
     o.UseNpgsql(builder.Configuration.GetAppDbConnectionString(), b => {
         b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
@@ -39,6 +47,7 @@ builder.Services.AddDbContext<AppDatabase>(o => {
     });
     o.UseSnakeCaseNamingConvention();
 });
+builder.Services.AddPagination();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddControllers();
 

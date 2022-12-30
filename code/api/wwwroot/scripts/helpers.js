@@ -13,6 +13,41 @@ function move_focus(element) {
     }
 }
 
+function is_promise(p) {
+    if (typeof p === 'object' && typeof p.then === 'function') {
+        return true;
+    }
+
+    return false;
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function retry(action, predicateOrRetryCount = 4, cooldown = 250) {
+    let result = undefined;
+    const maxTries = 1000;
+    if (typeof predicateOrRetryCount === "number") {
+        let tries = 0;
+        if (predicateOrRetryCount > maxTries) throw new Error("Retry count is larger than limit: " + maxTries);
+        while (!result && tries < predicateOrRetryCount) {
+            await sleep(cooldown);
+            result = is_promise(action) ? await action() : action();
+            tries++;
+        }
+    }
+    if (typeof predicateOrRetryCount === "function") {
+        let tries = 0;
+        while (predicateOrRetryCount(result) === false && tries < maxTries) {
+            await sleep(cooldown);
+            result = is_promise(action) ? await action() : action();
+            tries++;
+        }
+    }
+    return result;
+}
+
 function create_element_from_object(elementOptions) {
     return create_element(elementOptions.name, elementOptions.properties, elementOptions.children);
 }

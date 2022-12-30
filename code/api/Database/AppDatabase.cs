@@ -1,19 +1,17 @@
-using File = I2R.Storage.Api.Database.Models.File;
-
 namespace I2R.Storage.Api.Database;
 
 public class AppDatabase : DbContext
 {
     public AppDatabase(DbContextOptions<AppDatabase> options) : base(options) { }
     public DbSet<User> Users { get; set; }
-    public DbSet<File> Files { get; set; }
+    public DbSet<Models.File> Files { get; set; }
     public DbSet<Folder> Folders { get; set; }
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<PermissionGroup> PermissionGroups { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<User>(e => { e.ToTable("users"); });
-        modelBuilder.Entity<File>(e => {
+        modelBuilder.Entity<Models.File>(e => {
             e.HasMany(c => c.Permissions);
             e.HasOne(c => c.Folder);
             e.ToTable("files");

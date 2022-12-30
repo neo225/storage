@@ -2,6 +2,9 @@ namespace I2R.Storage.Api.Database.Models;
 
 public class File : Base
 {
+    public File() { }
+
+    public File(Guid createdBy) : base(createdBy) { }
     public string Name { get; set; }
     public string MimeType { get; set; }
     public long SizeInBytes { get; set; }

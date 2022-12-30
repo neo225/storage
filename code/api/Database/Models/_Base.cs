@@ -31,4 +31,8 @@ public class Base
         LastModifiedAt = AppDateTime.UtcNow;
         LastModifiedBy = performingUserId;
     }
+
+    public void SetOwner(Guid ownerId = default) {
+        OwningUserId = ownerId;
+    }
 }

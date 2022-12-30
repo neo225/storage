@@ -8,6 +8,7 @@ public class EndpointBase : ControllerBase
 
     [NonAction]
     protected ActionResult KnownProblem(string title = default, string subtitle = default, Dictionary<string, string[]> errors = default) {
+        HttpContext.Response.Headers.Add(AppHeaders.IS_KNOWN_PROBLEM, "1");
         return BadRequest(new KnownProblemModel {
             Title = title,
             Subtitle = subtitle,
@@ -18,6 +19,7 @@ public class EndpointBase : ControllerBase
 
     [NonAction]
     protected ActionResult KnownProblem(KnownProblemModel problem) {
+        HttpContext.Response.Headers.Add(AppHeaders.IS_KNOWN_PROBLEM, "1");
         problem.TraceId = HttpContext.TraceIdentifier;
         return BadRequest(problem);
     }

@@ -2,6 +2,9 @@ namespace I2R.Storage.Api.Database.Models;
 
 public class Folder : Base
 {
+    public Folder() { }
+
+    public Folder(Guid createdBy) : base(createdBy) { }
     public string Name { get; set; }
     public Folder Parent { get; set; }
     public Guid? ParentId { get; set; }

@@ -66,10 +66,12 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("MimeType")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("mime_type");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
@@ -130,6 +132,7 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
@@ -137,15 +140,8 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("owning_user_id");
 
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("parent_id");
-
                     b.HasKey("Id")
                         .HasName("pk_folders");
-
-                    b.HasIndex("ParentId")
-                        .HasDatabaseName("ix_folders_parent_id");
 
                     b.ToTable("folders", (string)null);
                 });
@@ -244,6 +240,7 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("created_by");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
@@ -264,6 +261,7 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
@@ -293,6 +291,7 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("created_by");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("first_name");
 
@@ -317,6 +316,7 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("last_name");
 
@@ -325,6 +325,7 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("owning_user_id");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("password");
 
@@ -337,6 +338,7 @@ namespace I2R.Storage.Api.Migrations
                         .HasColumnName("role");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("username");
 
@@ -359,16 +361,6 @@ namespace I2R.Storage.Api.Migrations
                         .HasConstraintName("fk_files_folders_folder_id");
 
                     b.Navigation("Folder");
-                });
-
-            modelBuilder.Entity("I2R.Storage.Api.Database.Models.Folder", b =>
-                {
-                    b.HasOne("I2R.Storage.Api.Database.Models.Folder", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId")
-                        .HasConstraintName("fk_folders_folders_parent_id");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("I2R.Storage.Api.Database.Models.Permission", b =>
