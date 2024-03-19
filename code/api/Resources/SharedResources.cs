@@ -1,4 +1,4 @@
-namespace I2R.Storage.Api.Resources;
+namespace Quality.Storage.Api.Resources;
 
 public class SharedResources
 {

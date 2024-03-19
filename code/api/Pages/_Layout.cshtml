@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/styles/base.css" asp-append-version="true">
     @await RenderSectionAsync("Head", false)
     <title>@ViewData["Title"] - Storage</title>
@@ -22,7 +21,7 @@
     </header>
 }
 @RenderBody()
-<script src="~/scripts/module.mjs" asp-append-version="true" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/temporal-polyfill@0.2.3/global.js"></script>
 <script src="~/scripts/helpers.js" asp-append-version="true"></script>
 <script src="~/scripts/base.js" asp-append-version="true"></script>
 @if (User.Identity?.IsAuthenticated ?? false) {

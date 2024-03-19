@@ -1,4 +1,4 @@
-namespace I2R.Storage.Api.Statics;
+namespace Quality.Storage.Api.Statics;
 
 public static class SystemConstants
 {

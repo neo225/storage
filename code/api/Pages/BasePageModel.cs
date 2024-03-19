@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace I2R.Storage.Api.Pages;
+namespace Quality.Storage.Api.Pages;
 
 public class BasePageModel : PageModel
 {
-    public LoggedInUserModel LoggedInUser => new(User);
-    public bool IsAutenticated => User.Identity?.IsAuthenticated ?? false;
+	public LoggedInUserModel LoggedInUser => new(User);
+	public bool IsAuthenticated => User.Identity?.IsAuthenticated ?? false;
 
-    public override void OnPageHandlerExecuting(PageHandlerExecutingContext context) {
-        if (!context.HttpContext.User.Identity?.IsAuthenticated ?? true) {
-            context.Result = new RedirectResult("/login");
-        }
+	public override void OnPageHandlerExecuting(PageHandlerExecutingContext context) {
+		if (!(context.HttpContext.User.Identity?.IsAuthenticated ?? true) && !context.HttpContext.Request.Path.StartsWithSegments("/login")) {
+			context.Result = new RedirectResult("/login");
+		}
 
-        base.OnPageHandlerExecuting(context);
-    }
+		base.OnPageHandlerExecuting(context);
+	}
 }

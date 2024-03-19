@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace I2R.Storage.Api.Utilities;
+namespace Quality.Storage.Api.Utilities;
 
 public static class FileValidators
 {

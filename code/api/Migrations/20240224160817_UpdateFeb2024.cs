@@ -1,209 +1,207 @@
-#nullable disable
+﻿#nullable disable
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Quality.Storage.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class FolderParent : Migration
+    public partial class UpdateFeb2024 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "owning_user_id",
+                table: "users");
+
             migrationBuilder.AlterColumn<string>(
                 name: "username",
                 table: "users",
-                type: "text",
+                type: "character varying(100)",
+                maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "password",
                 table: "users",
-                type: "text",
+                type: "character varying(100)",
+                maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "last_name",
                 table: "users",
-                type: "text",
+                type: "character varying(100)",
+                maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "first_name",
                 table: "users",
-                type: "text",
+                type: "character varying(100)",
+                maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "name",
                 table: "permission_groups",
-                type: "text",
+                type: "character varying(100)",
+                maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "description",
                 table: "permission_groups",
-                type: "text",
+                type: "character varying(450)",
+                maxLength: 450,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "name",
                 table: "folders",
-                type: "text",
+                type: "character varying(200)",
+                maxLength: 200,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
-
-            migrationBuilder.AddColumn<Guid>(
-                name: "parent_id",
-                table: "folders",
-                type: "uuid",
-                nullable: true);
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "name",
                 table: "files",
-                type: "text",
+                type: "character varying(200)",
+                maxLength: 200,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "mime_type",
                 table: "files",
-                type: "text",
+                type: "character varying(100)",
+                maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_folders_parent_id",
-                table: "folders",
-                column: "parent_id");
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_folders_folders_parent_id",
-                table: "folders",
-                column: "parent_id",
-                principalTable: "folders",
-                principalColumn: "id");
+                oldType: "text",
+                oldNullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "fk_folders_folders_parent_id",
-                table: "folders");
-
-            migrationBuilder.DropIndex(
-                name: "ix_folders_parent_id",
-                table: "folders");
-
-            migrationBuilder.DropColumn(
-                name: "parent_id",
-                table: "folders");
-
             migrationBuilder.AlterColumn<string>(
                 name: "username",
                 table: "users",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(100)",
+                oldMaxLength: 100,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "password",
                 table: "users",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(100)",
+                oldMaxLength: 100,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "last_name",
                 table: "users",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(100)",
+                oldMaxLength: 100,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "first_name",
                 table: "users",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(100)",
+                oldMaxLength: 100,
                 oldNullable: true);
+
+            migrationBuilder.AddColumn<Guid>(
+                name: "owning_user_id",
+                table: "users",
+                type: "uuid",
+                nullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "name",
                 table: "permission_groups",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(100)",
+                oldMaxLength: 100,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "description",
                 table: "permission_groups",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(450)",
+                oldMaxLength: 450,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "name",
                 table: "folders",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(200)",
+                oldMaxLength: 200,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "name",
                 table: "files",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(200)",
+                oldMaxLength: 200,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "mime_type",
                 table: "files",
                 type: "text",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text",
+                oldType: "character varying(100)",
+                oldMaxLength: 100,
                 oldNullable: true);
         }
     }

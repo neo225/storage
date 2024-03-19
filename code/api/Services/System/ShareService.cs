@@ -1,4 +1,4 @@
-namespace I2R.Storage.Api.Services.System;
+namespace Quality.Storage.Api.Services.System;
 
 public class ShareService
 {

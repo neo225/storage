@@ -1,8 +1,8 @@
-namespace I2R.Storage.Api.Pages;
+namespace Quality.Storage.Api.Pages;
 
-public class Index : PageModel
+public class Index : BasePageModel
 {
-    public ActionResult OnGet() {
-        return User.Identity.IsAuthenticated ? Redirect("/home") : Redirect("/login");
-    }
+	public void OnGet() {
+		ViewData["Title"] = "Index";
+	}
 }

@@ -1,16 +1,10 @@
-namespace I2R.Storage.Api.Endpoints.Account;
+namespace Quality.Storage.Api.Endpoints.Account;
 
-public class LogoutEndpoint : EndpointBase
+public class LogoutEndpoint(UserService userService) : EndpointBase
 {
-    private readonly UserService _userService;
-
-    public LogoutEndpoint(UserService userService) {
-        _userService = userService;
-    }
-
-    [HttpGet("~/account/logout")]
+	[HttpGet("~/account/logout")]
     public async Task<ActionResult> Handle() {
-        await _userService.LogOutUserAsync(HttpContext);
+        await userService.LogOutUserAsync(HttpContext);
         return Ok();
     }
 }

@@ -1,6 +1,4 @@
-using I2R.Storage.Api.Services.System;
-
-namespace I2R.Storage.Api.Services.Abstractions;
+namespace Quality.Storage.Api.Services.Abstractions;
 
 public interface IResourceService
 {

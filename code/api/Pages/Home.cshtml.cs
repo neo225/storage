@@ -1,7 +1,8 @@
-namespace I2R.Storage.Api.Pages;
+namespace Quality.Storage.Api.Pages;
 
 public class Home : BasePageModel
 {
-    public Home() : base() { }
-    public void OnGet() { }
+	public void OnGet() {
+		ViewData["Title"] = "Home";
+	}
 }

@@ -1,9 +1,8 @@
-﻿using System;
+﻿#nullable disable
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-namespace I2R.Storage.Api.Migrations
+namespace Quality.Storage.Api.Migrations
 {
     /// <inheritdoc />
     public partial class InitialYay : Migration

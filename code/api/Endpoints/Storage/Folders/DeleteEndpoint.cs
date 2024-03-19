@@ -1,4 +1,4 @@
-namespace I2R.Storage.Api.Endpoints.Storage.Folders;
+namespace Quality.Storage.Api.Endpoints.Storage.Folders;
 
 public class DeleteEndpoint
 {

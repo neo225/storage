@@ -1,16 +1,11 @@
-namespace I2R.Storage.Api.Services.System;
+namespace Quality.Storage.Api.Services.System;
 
-public class ChunkUploaderService
+public class ChunkUploaderService(AppDatabase database, ILogger<ChunkUploaderService> logger)
 {
-    private readonly ILogger<ChunkUploaderService> _logger;
-    private readonly AppDatabase _database;
+    private readonly ILogger<ChunkUploaderService> _logger = logger;
+    private readonly AppDatabase _database = database;
 
-    public ChunkUploaderService(AppDatabase database, ILogger<ChunkUploaderService> logger) {
-        _database = database;
-        _logger = logger;
-    }
-
-    public async Task<Guid> StartUploadSession() {
+	public async Task<Guid> StartUploadSession() {
         return default;
     }
 }

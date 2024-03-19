@@ -8,15 +8,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Quality.Storage.Api.Migrations
 {
     [DbContext(typeof(AppDatabase))]
-    [Migration("20221221214429_InitialYay")]
-    partial class InitialYay
+    [Migration("20240224160817_UpdateFeb2024")]
+    partial class UpdateFeb2024
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -65,13 +65,13 @@ namespace Quality.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("MimeType")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("mime_type");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("OwningUserId")
@@ -131,16 +131,23 @@ namespace Quality.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("OwningUserId")
                         .HasColumnType("uuid")
                         .HasColumnName("owning_user_id");
 
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("parent_id");
+
                     b.HasKey("Id")
                         .HasName("pk_folders");
+
+                    b.HasIndex("ParentId")
+                        .HasDatabaseName("ix_folders_parent_id");
 
                     b.ToTable("folders", (string)null);
                 });
@@ -239,8 +246,8 @@ namespace Quality.Storage.Api.Migrations
                         .HasColumnName("created_by");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)")
                         .HasColumnName("description");
 
                     b.Property<DateTime?>("LastDeletedAt")
@@ -260,8 +267,8 @@ namespace Quality.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("OwningUserId")
@@ -290,8 +297,8 @@ namespace Quality.Storage.Api.Migrations
                         .HasColumnName("created_by");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("first_name");
 
                     b.Property<DateTime?>("LastDeletedAt")
@@ -315,17 +322,13 @@ namespace Quality.Storage.Api.Migrations
                         .HasColumnName("last_modified_by");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("last_name");
 
-                    b.Property<Guid?>("OwningUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("owning_user_id");
-
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("password");
 
                     b.Property<Guid?>("PermissionGroupId")
@@ -337,8 +340,8 @@ namespace Quality.Storage.Api.Migrations
                         .HasColumnName("role");
 
                     b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("username");
 
                     b.HasKey("Id")
@@ -360,6 +363,16 @@ namespace Quality.Storage.Api.Migrations
                         .HasConstraintName("fk_files_folders_folder_id");
 
                     b.Navigation("Folder");
+                });
+
+            modelBuilder.Entity("I2R.Storage.Api.Database.Models.Folder", b =>
+                {
+                    b.HasOne("I2R.Storage.Api.Database.Models.Folder", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("fk_folders_folders_parent_id");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("I2R.Storage.Api.Database.Models.Permission", b =>

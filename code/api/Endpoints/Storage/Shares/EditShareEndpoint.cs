@@ -1,4 +1,4 @@
-namespace I2R.Storage.Api.Endpoints.Storage.Shares;
+namespace Quality.Storage.Api.Endpoints.Storage.Shares;
 
 public class EditShareEndpoint
 {

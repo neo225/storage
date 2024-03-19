@@ -1,17 +1,11 @@
-using I2R.Storage.Api.Services.Abstractions;
+using Quality.Storage.Api.Services.Abstractions;
 using File = System.IO.File;
 
-namespace I2R.Storage.Api.Services.System;
+namespace Quality.Storage.Api.Services.System;
 
-public class DefaultResourceService : IResourceService
+public class DefaultResourceService(IConfiguration configuration) : IResourceService
 {
-    private readonly IConfiguration _configuration;
-
-    public DefaultResourceService(IConfiguration configuration) {
-        _configuration = configuration;
-    }
-
-    public async Task SetBlobAsync(StorageBlobId id, Stream stream, CancellationToken cancellationToken = default) {
+	public async Task SetBlobAsync(StorageBlobId id, Stream stream, CancellationToken cancellationToken = default) {
         await stream.CopyToAsync(File.OpenWrite(EnsureCreatedAndReturnBasedPath(id)), cancellationToken);
     }
 
@@ -33,7 +27,7 @@ public class DefaultResourceService : IResourceService
     }
 
     private string EnsureCreatedAndReturnBasedPath(StorageBlobId id) {
-        var withoutId = Path.Combine(Directory.GetCurrentDirectory(), _configuration.GetValue(AppEnvVariables.STORAGE_ROOT, "__FILESYSTEM__"), id.Bucket.ToString());
+        var withoutId = Path.Combine(Directory.GetCurrentDirectory(), configuration.GetValue(AppEnvVariables.STORAGE_ROOT, "__FILESYSTEM__"), id.Bucket.ToString());
         Directory.CreateDirectory(withoutId);
         return Path.Combine(withoutId, id.Id.ToString());
     }

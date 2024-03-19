@@ -1,12 +1,10 @@
-namespace I2R.Storage.Api.Pages;
+namespace Quality.Storage.Api.Pages;
 
-public class Login : PageModel
+public class Login : BasePageModel
 {
-    public ActionResult OnGet() {
-        if (User.Identity?.IsAuthenticated ?? false) {
-            return Redirect("/home");
-        }
-
-        return Page();
-    }
+	public ActionResult OnGet() {
+		ViewData["Title"] = "Login";
+		if (IsAuthenticated) return Redirect("/home");
+		return Page();
+	}
 }

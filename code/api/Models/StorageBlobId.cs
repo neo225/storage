@@ -1,4 +1,4 @@
-namespace I2R.Storage.Api.Models;
+namespace Quality.Storage.Api.Models;
 
 public struct StorageBlobId
 {
