@@ -22,7 +22,7 @@ Any file or folder can be encrypted at rest.
 
 ### Sharing
 
-Any filer or folder can be shared arbitrarily.
+Any file or folder can be shared.
 
 ### Clients
 
@@ -30,8 +30,4 @@ Full featured Web and iOS clients are available.
 
 ### Public API
 
-The Storage api is dogfed, versioned and extensively documented.
-
-### Self hostable
-
-Pay us to host Storage for you, or host Storage on your own server using our docker images and extensive setup documentation.
+The Storage API is dogfed, versioned and documented.
